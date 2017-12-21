@@ -12,13 +12,8 @@
   <!-- Barra de navegación -->
   <nav class="navigation">
     <ul class="navigation-menu">
-<<<<<<< HEAD
       <li><a href="{{ url('/') }}" class="navigation-user-logo">
-        <img src="icons/logo.png" alt="Logo"></a>
-=======
-      <li><a href="home.php" class="navigation-user-logo">
         <img src="images/logo.png" alt="Logo"></a>
->>>>>>> e5e6c0998b28bcc6c24a951b5bd1603e49ce5f0f
       </li>
     </ul>
     <ul class="navigation-user">
