@@ -13,7 +13,7 @@
   <nav class="navigation">
     <ul class="navigation-menu">
       <li><a href="home.php" class="navigation-user-logo">
-        <img src="icons/logo.png" alt="Logo"></a>
+        <img src="images/logo.png" alt="Logo"></a>
       </li>
     </ul>
     <ul class="navigation-user">

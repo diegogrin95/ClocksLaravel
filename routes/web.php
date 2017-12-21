@@ -34,7 +34,7 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/relojes', 'ProductsController@index');
+Route::get('/productos', 'ProductsController@index');
 
 Route::get('/productos/agregar', 'ProductsController@create');
 Route::post('/productos/agregar', 'ProductsController@store');
