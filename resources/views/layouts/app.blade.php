@@ -23,9 +23,16 @@
       <li><a href="logout.php" class="navigation-user-link">Salir</a></li>
       <li><a href="ayuda.php" class="navigation-menu-link">Ayuda</a></li>
 
+      <li> <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="logButtons glyphicon glyphicon-user">Salir</a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+      </li>
+
+
+
+
       @else
-      <li><a href="{{ url('/ingresa') }}"><span class="navigation-user-link">Ingresá</a></li>
-      <li><a href="{{ url('/registro') }}"><span class="navigation-menu-link">Registrate</a></li>
+      <li><a href="{{ url('/login') }}"><span class="navigation-user-link">Ingresá</a></li>
+      <li><a href="{{ url('/register') }}"><span class="navigation-menu-link">Registrate</a></li>
       <li><a href="#"><span class="navigation-menu-link">Ayuda</a></li>
       @endif
 
