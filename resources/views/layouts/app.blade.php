@@ -12,7 +12,7 @@
   <!-- Barra de navegación -->
   <nav class="navigation">
     <ul class="navigation-menu">
-      <li><a href="home.php" class="navigation-user-logo">
+      <li><a href="{{ url('/') }}" class="navigation-user-logo">
         <img src="icons/logo.png" alt="Logo"></a>
       </li>
     </ul>
@@ -20,15 +20,9 @@
 
       @if(Auth::check())
       <li><span class="navigation-menu-link">Bienvenidos, </span></li>
-      <li><a href="logout.php" class="navigation-user-link">Salir</a></li>
+      <li><a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="navigation-user-link">Salir</a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form></li>
       <li><a href="ayuda.php" class="navigation-menu-link">Ayuda</a></li>
-
-      <li> <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="logButtons glyphicon glyphicon-user">Salir</a>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-      </li>
-
-
-
 
       @else
       <li><a href="{{ url('/login') }}"><span class="navigation-user-link">Ingresá</a></li>
