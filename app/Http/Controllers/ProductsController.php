@@ -49,34 +49,80 @@ class ProductsController extends Controller
 // store
 
 	public function store(Request $request) {
-	$input = $request->except('_token');
-	$rules = [
-		"name" => "required|unique:products",
-		"cost" => "required|numeric",
-		"profit_margin" => "required|numeric"
-	];
+    $rules = [
+        "name" => "required|unique:products",
+        "cost" => "required|numeric",
+        "profit_margin" => "required|numeric",
+        "category_id" => "required|numeric|between:1,3"
+    ];
 
-	$messages = [
-		"required" => "El :attribute es requerido!",
-		"unique" => "El :attribute tiene que ser único!",
-		"numeric" => "El :attribute tiene que ser numérico!"
-	];
+    $messages = [
+        "required" => "El :attribute es requerido!",
+        "unique" => "El :attribute tiene que ser único!",
+        "numeric" => "El :attribute tiene que ser numérico!",
+        "between" => "El :attribute tiene que estar entre :min y :max."
+    ];
 
+    $request->validate($rules, $messages);
 
-	$validator = Validator::make($input, $rules, $messages);
+    $extensionImagen = $request->file('fotoPath')->getClientOriginalExtension();
 
-	$product = \App\Product::create([
-		'name' => $request->input('name'),
-		'cost' => $request->input('cost'),
-		'profit_margin' => $request->input('profit_margin')
-	]);
+    $fotoPath = $request->file('fotoPath')->storeAs('productos', uniqid() . "." . $extensionImagen, 'public');
 
-	$category = \App\Category::find($request->input('category'));
+    $product = \App\Product::create([
+        'name' => $request->input('name'),
+        'cost' => $request->input('cost'),
+        'profit_margin' => $request->input('profit_margin'),
+        'fotopath' => $fotoPath
+    ]);
 
-	$product->properties()->sync($request->input('properties'));
-	$product->category()->associate($category);
-	$product->save();
+    $category = \App\Category::find($request->input('category_id'));
 
-	return redirect('/productos');
+    $product->properties()->sync($request->input('properties'));
+    $product->category()->associate($category);
+    $product->save();
+
+    return redirect('/productos');
+	}
+
+// destroy
+
+	public function destroy($id) {
+    $product = \App\Product::find($id);
+
+    $product->properties()->sync([]);
+    $product->delete();
+
+    return redirect('/productos');
+	}
+// edit 
+	public function edit($id) {
+    $product = \App\Product::find($id);
+    $categories = \App\Category::all();
+    $properties = \App\Property::all();
+
+    $variables = [
+        'product' => $product,
+        'categories' => $categories,
+        'properties' => $properties,
+    ];
+
+    return view('products.edit', $variables);
+	}
+
+// update
+	public function update(Request $request, $id) {
+    $product = \App\Product::find($id);
+    $category = \App\Category::find($request->input('category_id'));
+
+    $product->name = $request->input('name');
+    $product->cost = $request->input('cost');
+    $product->profit_margin = $request->input('profit_margin');
+    $product->category()->associate($category);
+    $product->save();
+
+    $product->properties()->sync($request->input('properties'));
+
+    return redirect('/productos/' . $id);
 	}
 }

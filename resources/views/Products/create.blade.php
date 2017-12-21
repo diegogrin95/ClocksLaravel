@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-	<form class="col-md-5" action="/productos/agregar" method="post">
+	<form class="col-md-5" action="/productos/agregar" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="name">Nombre</label>
@@ -64,6 +64,19 @@
     <div class="form-group">
         <button type="submit" name="button" class="btn btn-primary">Enviar</button>
     </div>
+    <div class="form-group">
+    <label for="fotoPath">Imagen</label>
+    <input type="file" name="fotoPath" id="fotoPath" class="form-control">
+    @if ($errors->has('fotoPath'))
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->get('fotoPath') as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+</div>
 </form>
 </body>
 </html>
