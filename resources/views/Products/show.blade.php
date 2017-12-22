@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>{{$product->name}}</title>
-    <link rel="stylesheet" href="/css/app.css">
-</head>
-<body>
+@extends ('layouts.app')
+
+@section ('content')
+
+    <!-- <title>{{$product->name}}</title> -->
+    <!-- <link rel="stylesheet" href="/css/app.css"> -->
+<!-- <body> -->
     <h1>{{$product->name}}</h1>
     <img src="{{ asset('storage/' . $product->fotopath) }}" alt="">
     <p>{{$product->cost}}</p>
@@ -22,5 +21,6 @@
         {{ method_field('delete') }}
         <button type="submit">Borrar</button>
     </form>
-</body>
-</html>
+<!-- </body> -->
+
+@endsection
