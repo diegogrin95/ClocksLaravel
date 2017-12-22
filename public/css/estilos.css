@@ -2,6 +2,9 @@ body  { margin: 0 auto;
   font-family: 'Lato', sans-serif;
 }
 
+header {
+  padding-bottom: 49px;
+}
 /* Barra de navegación */
 .navigation {
   width: 100%;
@@ -78,15 +81,19 @@ body  { margin: 0 auto;
 }
 
 /* Banner principal*/
-.main-banner {
-  background-image: url(../images/image_1.png);
+.carousel-inner {
+  width: 100% !important;
+  height: 400px !important;
+}
+
+/*.main-banner {
   height: 400px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 30% 50%;
   width: 100%;
   text-indent: -400px;
-}
+}*/
 
 /* Categorías*/
 .categories-text {
